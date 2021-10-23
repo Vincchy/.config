@@ -56,7 +56,8 @@ def init_colors():
             ['#d666a6', '#d666a6'], # Pink (used)
             ['#74AFAB', '#74AFAB'], # Cyan (used)
 
-            ['#2093bd', '#2093bd']] # Cyan
+            ['#2093bd', '#2093bd'], # Cyan
+            ['#ffffff', '#ffffff']] # White
 
 colors=init_colors()
 
@@ -160,7 +161,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 #-----LAYOUTS-----#
 layouts = [
     #layout.Columns(layout_theme)
-    layout.Columns(border_focus_stack=colors[6], border_normal_stack=colors[0], margin=5, border_width=2),
+    layout.Columns(border_focus=colors[6], border_normal=colors[0], margin=5, border_width=1),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -193,12 +194,31 @@ separate = lambda bcolor: widget.Sep (
     size_percent=0,
 )
 
+# Right rounded corner widget
+right_corner = lambda fcolor: widget.TextBox(
+    text="⬤  ",
+    fontsize=40,
+    background=colors[0],
+    foreground=fcolor,
+    max_chars=1,
+    padding=-12,
+)
+
+# Left rounded corner widget
+left_corner = lambda fcolor: widget.TextBox(
+    text="  ⬤",
+    fontsize=40,
+    background=colors[0],
+    foreground=fcolor,
+    max_chars=1,
+    padding=-12,
+)
+
 screens = [
     Screen(
         top=bar.Bar(
             [
                 separate(colors[0]),
-
                 widget.GroupBox(
                     fontsize=10,
                     highlight_method='line',
@@ -215,11 +235,9 @@ screens = [
                 
                 separate(colors[0]),
                 separate(colors[0]),
-                 
                 widget.Prompt(
                     background=colors[0]
                     ),
-
                 separate(colors[0]),
                 separate(colors[0]),
 
@@ -229,15 +247,15 @@ screens = [
                     foreground=colors[7]
                     ),
 
+                left_corner(colors[6]),
                 separate(colors[6]),
-
                 widget.Clock(
                     format='%A %d-%m-%Y %H:%M', 
                     background=colors[6],
-                    foreground=colors[0],
+                    foreground=colors[9],
                     ),
-
                 separate(colors[6]),
+                right_corner(colors[6]),
 
                 widget.Spacer(
                     background=colors[0]
@@ -255,51 +273,75 @@ screens = [
                     icon_size=20,
                     background=colors[0]
                     ),
-
                 separate(colors[0]),
-                separate(colors[7]),
                 
+                left_corner(colors[7]),
+                separate(colors[7]),
+                widget.TextBox(
+                    text='🔈',
+                    fontsize=15,
+                    background=colors[7],
+                    foreground=colors[9]
+                    ),
                 widget.Volume(
                     background=colors[7],
                     emoji=False,
                     update_interval=0.05,
-                    foreground=colors[0],
+                    foreground=colors[9],
                     ),
-
                 separate(colors[7]),
+                right_corner(colors[7]),
+
+                left_corner(colors[6]),
                 separate(colors[6]),
-            
+                widget.TextBox(
+                    text='⟳',
+                    fontsize=20,
+                    background=colors[6],
+                    foreground=colors[9]
+                    ),
                 widget.CheckUpdates(
                     background=colors[6],
-                    padding_x=10,
-                    distro='arch',
-                    max_chars=10,
-                    foreground=colors[0],
+                    distro='Arch_checkupdates',
+                    display_format='{updates} Updates',
+                    no_update_string='No',
+                    update_interval=1800,
+                    colour_have_updates=colors[9],
+                    colour_no_updates=colors[9],
+                    foreground=colors[9],
                     ),
-
                 separate(colors[6]),
-                separate(colors[7]),
+                right_corner(colors[6]),
 
+                left_corner(colors[7]),
+                separate(colors[7]),
+                widget.TextBox(
+                    text='🖬',
+                    fontsize=15,
+                    background=colors[7],
+                    foreground=colors[9]
+                    ),
                 widget.Memory(
                     measure_mem='M',
                     measure_swap='M', 
                     background=colors[7],
-                    foreground=colors[0],
+                    foreground=colors[9],
                     ),
-
                 separate(colors[7]),
-                separate(colors[6]),
+                right_corner(colors[7]),
 
+                left_corner(colors[6]),
+                separate(colors[6]),
                 widget.Net(
                     interface="enp3s0", 
                     format='{down}↓{up}↑', 
                     background=colors[6],
-                    foreground=colors[0],
+                    foreground=colors[9],
                     ),
-
                 separate(colors[6]),
-                separate(colors[0]),
+                right_corner(colors[6]),
 
+                separate(colors[0]),
                 widget.QuickExit(
                     background=colors[0],
                     countdown_format=' ⏻ ',
@@ -308,7 +350,6 @@ screens = [
                     fontsize=20,
                     foreground=colors[3],
                     ),
-
                 separate(colors[0]),
             ],
             size=24,
