@@ -7,3 +7,4 @@ picom
 nitrogen
 alacritty
 pcmanfm
+fish
