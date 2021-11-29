@@ -1,10 +1,4 @@
 # Dotfiles
 Arch linux custom config by Vinchy.
 
-Dependencies:
-qtile
-picom
-nitrogen
-alacritty
-pcmanfm
-fish
+Works best with install script https://github.com/Vincchy/arch-o-matic
