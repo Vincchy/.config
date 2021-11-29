@@ -1,0 +1,9 @@
+super + {t,f,v,c,e,s,r}
+	{tor-browser,firefox -P Hardened,pcmanfm,code,element-desktop,signal-desktop,firefox -P Normal}
+
+
+alt + shift + s
+	maim --select | tee ~/screenshots/(date +%s).png | xclip -selection clipboard -t image/png
+
+alt + shift + a
+	maim ~/screenshots/(date '+%H.%M.%S_%d-%m-%Y').png
